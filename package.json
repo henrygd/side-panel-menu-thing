@@ -1,0 +1,51 @@
+{
+	"name": "side-panel-menu-thing",
+	"version": "0.0.1",
+	"main": "dist/side-panel-menu-thing.umd.js",
+	"module": "dist/side-panel-menu-thing.mjs",
+	"svelte": "src/side-panel-menu-thing.svelte",
+	"description": "Good option for mobile menus, general content reveals, or whatever else.",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/henrygd/side-panel-menu-thing.git"
+	},
+	"keywords": [
+		"offcanvas",
+		"menu",
+		"panel",
+		"reveal",
+		"mobile menu",
+		"touch"
+	],
+	"scripts": {
+		"start": "run-p dev sass-watch sass-watch-demo serve",
+		"build": "run-p rollup-build sass-build",
+		"dev": "rollup -c -w",
+		"serve": "live-server public",
+		"rollup-build": "rollup -c",
+		"sass-watch": "sass --watch --no-source-map src/side-panel-menu-thing.scss:public/side-panel-menu-thing.css",
+		"sass-watch-demo": "sass --watch --no-source-map src/demo/demo.scss:public/demo.css",
+		"sass-build": "sass --style expanded --no-source-map src/side-panel-menu-thing.scss:dist/side-panel-menu-thing.css && sass --style compressed --no-source-map src/side-panel-menu-thing.scss:public/side-panel-menu-thing.css src/demo/demo.scss:public/demo.css",
+		"postinstall": "npm run build"
+	},
+	"dependencies": {
+		"hide-show-scroll": "^1.1.0",
+		"svelte": "^3.21.0"
+	},
+	"devDependencies": {
+		"@rollup/plugin-buble": "^0.21.3",
+		"@rollup/plugin-commonjs": "^11.1.0",
+		"@rollup/plugin-node-resolve": "^7.1.3",
+		"gh-pages": "^2.2.0",
+		"live-server": "^1.2.1",
+		"node-sass": "^4.14.0",
+		"npm-run-all": "^4.1.5",
+		"release-it": "*",
+		"rollup": "^2.7.2",
+		"rollup-plugin-filesize": "^7.0.0",
+		"rollup-plugin-svelte": "^5.2.1",
+		"rollup-plugin-terser": "^5.3.0",
+		"sass": "^1.26.5"
+	}
+}

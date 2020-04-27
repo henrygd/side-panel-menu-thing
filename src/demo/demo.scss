@@ -1,0 +1,251 @@
+@import 'reset';
+
+@mixin fillall() {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+html {
+	background: #f4f4f4;
+}
+
+html,
+body {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	scroll-behavior: smooth;
+}
+
+body {
+	// background: #333;
+	// color: #fff;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-tap-highlight-color: transparent;
+	font-size: 17px;
+	background: #fafafa;
+}
+
+img {
+	max-width: 100%;
+}
+
+p {
+	line-height: 1.8;
+}
+
+main {
+	flex-grow: 1;
+}
+
+.main {
+	width: 100%;
+	margin: 0 auto;
+	padding: 0 6%;
+	position: relative;
+}
+
+.inner-wrap {
+	position: relative;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	line-height: 1.4;
+}
+
+footer {
+	background: rgba(0, 0, 0, 0.1);
+	margin: 30px 0 0;
+}
+
+button {
+	background-color: #1687ce;
+	color: #fff;
+	border: none;
+	padding: 10px 12px;
+	border-radius: 2px;
+	cursor: pointer;
+	font-weight: 500;
+	transition: background-color 0.2s;
+	&:hover,
+	&:focus {
+		background-color: #229ce8;
+	}
+}
+
+.bike {
+	position: relative;
+	overflow: hidden;
+	padding: 29px 44px;
+	background: #e2e5e6;
+	border: 1px solid #eee;
+	margin: 30px 0;
+	border-radius: 2px;
+	// img {
+	// 	filter: drop-shadow(0 0 3rem rgba(0, 0, 0, 0.3));
+	// }
+	button {
+		position: absolute;
+		top: 25px;
+		right: 25px;
+	}
+	.spmt {
+		font-size: 16px;
+	}
+}
+
+// demo specific menu stuff
+.spmt {
+	padding: 30px;
+	box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+	h2:first-of-type {
+		margin-top: 0;
+	}
+	img {
+		width: 100%;
+	}
+}
+
+.menu-head {
+	position: relative;
+	// background: linear-gradient(15deg, #003b76 10%, #39c3b2);
+	padding: 140px 30px 15px;
+	margin: -30px -30px 0;
+	color: #fff;
+	&:before {
+		content: '';
+		background: linear-gradient(15deg, #202c37, #3e5b76);
+		background: linear-gradient(15deg, #034f7d 10%, #13d8a0 130%);
+		// opacity: 0.95;
+		@include fillall;
+	}
+	> div {
+		@include fillall;
+		background-position: 50% 10%;
+		opacity: 0.13;
+	}
+	h2 {
+		margin: 0;
+		position: relative;
+	}
+}
+
+.buttons {
+	margin: 20px 0 25px;
+}
+
+// .strive {
+.menu-head {
+	> div {
+		background-position: 35% 55%;
+	}
+	&:before {
+		background: linear-gradient(15deg, #003b76 10%, #39c3b2);
+	}
+}
+// }
+
+.lux {
+	.menu-head {
+		> div {
+			background-position: 30% 33%;
+		}
+		&:before {
+			background: linear-gradient(15deg, #e82314 15%, #fba59f);
+		}
+	}
+}
+
+.github-link {
+	background: #171c21;
+	color: #fff;
+	padding: 13px 5% 9px;
+	text-align: center;
+	text-decoration: none;
+	transition: background-color 0.2s;
+	display: block;
+	margin-top: 25px;
+	&:first-child {
+		margin: 0;
+	}
+	&:hover,
+	&:focus {
+		background: #101317;
+	}
+	span {
+		&:before {
+			content: 'github.com/';
+		}
+		position: relative;
+		top: -4px;
+		margin: 0 0 0 3px;
+		font-size: 16px;
+		font-weight: 500;
+	}
+	svg {
+		width: 20px;
+		height: 20px;
+		fill: #fff;
+	}
+}
+
+.hero {
+	background: #292f35;
+	// background: #2c333a;
+	color: #fff;
+	padding: 65px 0 70px;
+	margin: 0 0 30px;
+	h2 {
+		margin-top: 0;
+		a {
+			text-decoration: none;
+			position: relative;
+			top: 3px;
+			margin: 0 0 0 4px;
+		}
+	}
+	button {
+		margin-top: 5px;
+	}
+}
+
+@media (max-width: 700px) {
+	body {
+		font-size: 16px;
+	}
+	p {
+		line-height: 1.8;
+	}
+	.github-link {
+		span {
+			&:before {
+				content: '';
+			}
+		}
+	}
+	.hero {
+		padding: 40px 0 47px;
+	}
+	.heading-badges {
+		display: block;
+		margin: 5px -5px -5px;
+	}
+	.bike {
+		padding: 20px 5% 20px;
+		button {
+			top: 12px;
+			right: auto;
+			left: 12px;
+		}
+	}
+}
