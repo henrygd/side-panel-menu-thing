@@ -27,7 +27,8 @@
 		"sass-watch": "sass --watch --no-source-map src/side-panel-menu-thing.scss:public/side-panel-menu-thing.css",
 		"sass-watch-demo": "sass --watch --no-source-map src/demo/demo.scss:public/demo.css",
 		"sass-build": "sass --style expanded --no-source-map src/side-panel-menu-thing.scss:dist/side-panel-menu-thing.css && sass --style compressed --no-source-map src/side-panel-menu-thing.scss:public/side-panel-menu-thing.css src/demo/demo.scss:public/demo.css",
-		"postinstall": "npm run build"
+		"deploy": "gh-pages -d demo",
+		"release": "release-it"
 	},
 	"dependencies": {
 		"hide-show-scroll": "^1.1.0",
