@@ -750,7 +750,7 @@ function instance($$self, $$props, $$invalidate) {
 					fixed && hideShowScroll.hide();
 
 					// todo: something about this - focus is
-					setTimeout(function () { return menu.focus(); }, 9);
+					setTimeout(function () { return menu.focus(); }, 99);
 
 					onShow && onShow();
 				} else {
