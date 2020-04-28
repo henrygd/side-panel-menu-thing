@@ -1,8 +1,8 @@
 # Side Panel / Mobile Menu Thing [![npm][npm-image]][npm-url] [![File Size][size-image]][cdn-url]
 
-[npm-image]: https://img.shields.io/npm/v/side-panel-menu-thing.svg?style=flat
+[npm-image]: https://badgen.net/npm/v/side-panel-menu-thing
 [npm-url]: https://www.npmjs.com/package/side-panel-menu-thing
-[size-image]: https://img.badgesize.io/henrygd/side-panel-menu-thing/master/dist/side-panel-menu-thing.min.js?compression=gzip
+[size-image]: https://badgen.net/badgesize/gzip/henrygd/side-panel-menu-thing/master/dist/side-panel-menu-thing.min.js
 [cdn-url]: https://cdn.jsdelivr.net/npm/side-panel-menu-thing/dist/side-panel-menu-thing.min.js
 
 ![example](example.gif)
