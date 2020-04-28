@@ -31,24 +31,24 @@ import sidePanel from 'side-panel-menu-thing'
 
 // target and content required, others optional
 const menu = sidePanel({
-  // target container (where it's mounted and listens for touch)
-  target: document.body
-  // panel content (will be removed and added in the panel)
-  content: document.getElementById('content')
-  // width of panel
-  width: 400,
-  // open / close animation time
-  duration: 450,
-  // fixed to screen
-  fixed: true,
-  // open on left
-  left: false,
-  // whether to open on touch drag
-  dragOpen: true,
-  // runs when the menu is opened (as soon as it's visible)
-  onShow: () => console.log('showing'),
-  // runs when the menu is closed (as soon as it's hidden)
-  onHide: () => console.log('hidden'),
+	// target container (where it's mounted and listens for touch)
+	target: document.body,
+	// panel content (will be removed and added in the panel)
+	content: document.getElementById('content'),
+	// width of panel
+	width: 400,
+	// open / close animation time
+	duration: 450,
+	// fixed to screen
+	fixed: true,
+	// open on left
+	left: false,
+	// whether to open on touch drag
+	dragOpen: true,
+	// runs when the menu is opened (as soon as it's visible)
+	onShow: () => console.log('showing'),
+	// runs when the menu is closed (as soon as it's hidden)
+	onHide: () => console.log('hidden'),
 })
 
 // options are accessible / changeable afterward
