@@ -30,6 +30,12 @@
 		"deploy": "gh-pages -d public",
 		"release": "release-it"
 	},
+	"release-it": {
+		"hooks": {
+			"after:bump": "npm run build",
+			"after:release": "npm run deploy"
+		}
+	},
 	"dependencies": {
 		"hide-show-scroll": "^1.1.0",
 		"svelte": "^3.21.0"
