@@ -84,6 +84,7 @@
 		if (content) {
 			node.appendChild(content)
 		}
+
 		target.addEventListener(
 			'touchstart',
 			e => {
@@ -164,7 +165,7 @@
 					// stop background scrolling
 					fixed && hideShowScroll.hide()
 					// todo: something about this - focus is
-					setTimeout(() => menu.focus(), 9)
+					setTimeout(() => menu.focus(), 99)
 					onShow && onShow()
 				} else {
 					// restore focus
