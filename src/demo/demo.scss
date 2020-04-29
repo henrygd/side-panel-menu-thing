@@ -247,5 +247,8 @@ button {
 			right: auto;
 			left: 12px;
 		}
+		> .panel-content {
+			display: none;
+		}
 	}
 }
