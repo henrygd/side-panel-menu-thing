@@ -137,7 +137,7 @@
 						touchEventData.start + percentDragged * (left ? -100 : 100)
 
 					if (newMenuPos <= 100 && newMenuPos >= 0) {
-						menuPos.set(newMenuPos, { duration: 0 })
+						menuPos.set(newMenuPos, { duration: 1 })
 					}
 				}
 			},

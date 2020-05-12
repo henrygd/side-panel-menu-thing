@@ -38,7 +38,7 @@
 	},
 	"dependencies": {
 		"hide-show-scroll": "^1.1.0",
-		"svelte": "^3.21.0"
+		"svelte": "^3.22.2"
 	},
 	"devDependencies": {
 		"@rollup/plugin-buble": "^0.21.3",
