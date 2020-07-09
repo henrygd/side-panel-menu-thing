@@ -45,6 +45,8 @@ const menu = sidePanel({
 	left: false,
 	// whether to open on touch drag
 	dragOpen: true,
+	// prevent HTML scrolling when fixed
+	preventScroll: true,
 	// runs when the menu is opened (as soon as it's visible)
 	onShow: () => console.log('showing'),
 	// runs when the menu is closed (as soon as it's hidden)

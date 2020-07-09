@@ -12,6 +12,7 @@
 	export let dragOpen = true
 	export let onShow = null
 	export let onHide = null
+	export let preventScroll = true
 
 	content.parentElement.removeChild(content)
 
@@ -163,7 +164,7 @@
 			update: shown => {
 				if (shown) {
 					// stop background scrolling
-					fixed && hideShowScroll.hide()
+					fixed && preventScroll && hideShowScroll.hide()
 					// todo: something about this - focus is
 					setTimeout(() => menu.focus(), 99)
 					onShow && onShow()
@@ -171,7 +172,7 @@
 					// restore focus
 					focusTrigger && focusTrigger.focus({ preventScroll: true })
 					// allow background scrolling
-					fixed && hideShowScroll.show()
+					fixed && preventScroll && hideShowScroll.show()
 					onHide && onHide()
 				}
 			},
