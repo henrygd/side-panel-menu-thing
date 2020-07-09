@@ -539,14 +539,14 @@ function create_fragment(ctx) {
 			append(div2, div0);
 			append(div2, t);
 			append(div2, div1);
-			/*div1_binding*/ ctx[23](div1);
-			/*div2_binding*/ ctx[25](div2);
+			/*div1_binding*/ ctx[24](div1);
+			/*div2_binding*/ ctx[26](div2);
 			if (remount) { run_all(dispose); }
 
 			dispose = [
 				listen(div0, "click", /*hide*/ ctx[3]),
 				action_destroyer(onMount_action = /*onMount*/ ctx[11].call(null, div1, /*shown*/ ctx[8])),
-				listen(div1, "keydown", /*keydown_handler*/ ctx[24])
+				listen(div1, "keydown", /*keydown_handler*/ ctx[25])
 			];
 		},
 		p: function p(ctx, ref) {
@@ -588,8 +588,8 @@ function create_fragment(ctx) {
 		o: noop,
 		d: function d(detaching) {
 			if (detaching) { detach(div2); }
-			/*div1_binding*/ ctx[23](null);
-			/*div2_binding*/ ctx[25](null);
+			/*div1_binding*/ ctx[24](null);
+			/*div2_binding*/ ctx[26](null);
 			run_all(dispose);
 		}
 	};
@@ -616,6 +616,7 @@ function instance($$self, $$props, $$invalidate) {
 	var dragOpen = $$props.dragOpen; if ( dragOpen === void 0 ) dragOpen = true;
 	var onShow = $$props.onShow; if ( onShow === void 0 ) onShow = null;
 	var onHide = $$props.onHide; if ( onHide === void 0 ) onHide = null;
+	var preventScroll = $$props.preventScroll; if ( preventScroll === void 0 ) preventScroll = true;
 	content.parentElement.removeChild(content);
 
 	// starting touch points
@@ -751,7 +752,7 @@ function instance($$self, $$props, $$invalidate) {
 			update: function (shown) {
 				if (shown) {
 					// stop background scrolling
-					fixed && hideShowScroll.hide();
+					fixed && preventScroll && hideShowScroll.hide();
 
 					// todo: something about this - focus is
 					setTimeout(function () { return menu.focus(); }, 99);
@@ -762,7 +763,7 @@ function instance($$self, $$props, $$invalidate) {
 					focusTrigger && focusTrigger.focus({ preventScroll: true });
 
 					// allow background scrolling
-					fixed && hideShowScroll.show();
+					fixed && preventScroll && hideShowScroll.show();
 
 					onHide && onHide();
 				}
@@ -794,6 +795,7 @@ function instance($$self, $$props, $$invalidate) {
 		if ("dragOpen" in $$props) { $$invalidate(15, dragOpen = $$props.dragOpen); }
 		if ("onShow" in $$props) { $$invalidate(16, onShow = $$props.onShow); }
 		if ("onHide" in $$props) { $$invalidate(17, onHide = $$props.onHide); }
+		if ("preventScroll" in $$props) { $$invalidate(18, preventScroll = $$props.preventScroll); }
 	};
 
 	var overlayOpacity;
@@ -830,6 +832,7 @@ function instance($$self, $$props, $$invalidate) {
 		dragOpen,
 		onShow,
 		onHide,
+		preventScroll,
 		show,
 		startX,
 		startY,
@@ -855,7 +858,8 @@ var Side_panel_menu_thing = /*@__PURE__*/(function (SvelteComponent) {
 			dragOpen: 15,
 			onShow: 16,
 			onHide: 17,
-			show: 18,
+			preventScroll: 18,
+			show: 19,
 			hide: 3
 		});
 	}
@@ -864,7 +868,7 @@ var Side_panel_menu_thing = /*@__PURE__*/(function (SvelteComponent) {
 	Side_panel_menu_thing.prototype = Object.create( SvelteComponent && SvelteComponent.prototype );
 	Side_panel_menu_thing.prototype.constructor = Side_panel_menu_thing;
 
-	var prototypeAccessors = { target: { configurable: true },content: { configurable: true },width: { configurable: true },duration: { configurable: true },fixed: { configurable: true },left: { configurable: true },dragOpen: { configurable: true },onShow: { configurable: true },onHide: { configurable: true },show: { configurable: true },hide: { configurable: true } };
+	var prototypeAccessors = { target: { configurable: true },content: { configurable: true },width: { configurable: true },duration: { configurable: true },fixed: { configurable: true },left: { configurable: true },dragOpen: { configurable: true },onShow: { configurable: true },onHide: { configurable: true },preventScroll: { configurable: true },show: { configurable: true },hide: { configurable: true } };
 
 	prototypeAccessors.target.get = function () {
 		return this.$$.ctx[12];
@@ -947,8 +951,17 @@ var Side_panel_menu_thing = /*@__PURE__*/(function (SvelteComponent) {
 		flush();
 	};
 
-	prototypeAccessors.show.get = function () {
+	prototypeAccessors.preventScroll.get = function () {
 		return this.$$.ctx[18];
+	};
+
+	prototypeAccessors.preventScroll.set = function (preventScroll) {
+		this.$set({ preventScroll: preventScroll });
+		flush();
+	};
+
+	prototypeAccessors.show.get = function () {
+		return this.$$.ctx[19];
 	};
 
 	prototypeAccessors.hide.get = function () {
