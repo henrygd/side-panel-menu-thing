@@ -481,21 +481,27 @@ function tweened(value, defaults) {
 
 var html = document.documentElement;
 var scrollbarWidth;
+var defaultOverflowStyle;
 var hidden;
 
 var hide = function () {
 	if (hidden) {
 		return
 	}
+	// store existing overflow style
+	defaultOverflowStyle = defaultOverflowStyle || getComputedStyle(html).overflow;
+	// calculate scrollbar width if any
 	scrollbarWidth = window.innerWidth - html.clientWidth;
+	// hide overflow
 	html.style.overflow = 'hidden';
+	// add padding to compensate for scrollbar and prevent shifting
 	scrollbarWidth && (html.style.paddingRight = scrollbarWidth + "px");
 	hidden = true;
 };
 
 var show = function () {
-	html.style.overflow = 'auto';
-	scrollbarWidth && (html.style.paddingRight = '0');
+	html.style.overflow = defaultOverflowStyle;
+	scrollbarWidth && (html.style.paddingRight = 0);
 	hidden = false;
 };
 

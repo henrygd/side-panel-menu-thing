@@ -1,6 +1,6 @@
 {
 	"name": "side-panel-menu-thing",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"main": "dist/side-panel-menu-thing.umd.js",
 	"module": "dist/side-panel-menu-thing.mjs",
 	"svelte": "src/side-panel-menu-thing.svelte",
