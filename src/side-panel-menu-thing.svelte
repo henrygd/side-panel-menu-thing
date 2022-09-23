@@ -16,7 +16,7 @@
 	export let onHide = null
 	export let preventScroll = true
 
-	content.parentElement.removeChild(content)
+	content.parentElement?.removeChild(content)
 
 	// starting touch points
 	let startX
