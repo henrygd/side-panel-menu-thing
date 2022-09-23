@@ -27,14 +27,7 @@
 		"sass-watch": "sass --watch --no-source-map src/side-panel-menu-thing.scss:public/side-panel-menu-thing.css",
 		"sass-watch-demo": "sass --watch --no-source-map src/demo/demo.scss:public/demo.css",
 		"sass-build": "sass --style expanded --no-source-map src/side-panel-menu-thing.scss:dist/side-panel-menu-thing.css && sass --style compressed --no-source-map src/side-panel-menu-thing.scss:public/side-panel-menu-thing.css src/demo/demo.scss:public/demo.css",
-		"deploy": "gh-pages -d public",
-		"release": "release-it"
-	},
-	"release-it": {
-		"hooks": {
-			"after:bump": "npm run build",
-			"after:release": "npm run deploy"
-		}
+		"deploy": "gh-pages -d public"
 	},
 	"dependencies": {
 		"hide-show-scroll": "^1.1.1",
@@ -46,7 +39,6 @@
 		"gh-pages": "^2.2.0",
 		"live-server": "^1.2.1",
 		"npm-run-all": "^4.1.5",
-		"release-it": "*",
 		"rollup": "^2.7.2",
 		"rollup-plugin-filesize": "^7.0.0",
 		"rollup-plugin-svelte": "^5.2.1",
