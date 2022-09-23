@@ -167,7 +167,7 @@
 					fixed && preventScroll && hideScroll()
 					// todo: something about this - focus is
 					setTimeout(() => menu.focus(), 99)
-					onShow && onShow()
+					onShow && onShow(container)
 				} else {
 					// restore focus
 					focusTrigger && focusTrigger.focus({ preventScroll: true })
