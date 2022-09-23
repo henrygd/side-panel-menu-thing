@@ -2,7 +2,7 @@ import svelte from 'rollup-plugin-svelte'
 import resolve from '@rollup/plugin-node-resolve'
 // import commonjs from '@rollup/plugin-commonjs'
 import { terser } from 'rollup-plugin-terser'
-import filesize from 'rollup-plugin-filesize'
+import size from 'rollup-plugin-size'
 
 const production = !process.env.ROLLUP_WATCH
 
@@ -39,9 +39,11 @@ let config = [
 		output: iifeOutput,
 		plugins: [
 			svelte({
-				dev: !production,
+				compilerOptions: {
+					dev: !production,
+				},
 			}),
-			resolve(),
+			resolve({ browser: true }),
 			production &&
 				terser({
 					compress: {
@@ -49,9 +51,7 @@ let config = [
 						pure_getters: true,
 					},
 				}),
-			filesize({
-				showMinifiedSize: !production,
-			}),
+			size(),
 		],
 	},
 ]
@@ -64,7 +64,7 @@ if (production) {
 			format: 'es',
 			file: 'dist/side-panel-menu-thing.mjs',
 		},
-		plugins: [svelte(), resolve()],
+		plugins: [svelte(), resolve({ browser: true })],
 	})
 }
 
