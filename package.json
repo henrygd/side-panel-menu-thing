@@ -30,7 +30,7 @@
 		"deploy": "gh-pages -d public"
 	},
 	"dependencies": {
-		"hide-show-scroll": "^1.1.1",
+		"hide-show-scroll": "^2.0.0",
 		"svelte": "^3.22.2"
 	},
 	"devDependencies": {
