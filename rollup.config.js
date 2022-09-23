@@ -2,7 +2,6 @@ import svelte from 'rollup-plugin-svelte'
 import resolve from '@rollup/plugin-node-resolve'
 // import commonjs from '@rollup/plugin-commonjs'
 import { terser } from 'rollup-plugin-terser'
-import buble from '@rollup/plugin-buble'
 import filesize from 'rollup-plugin-filesize'
 
 const production = !process.env.ROLLUP_WATCH
@@ -50,9 +49,6 @@ let config = [
 						pure_getters: true,
 					},
 				}),
-			buble({
-				transforms: { forOf: false },
-			}),
 			filesize({
 				showMinifiedSize: !production,
 			}),
@@ -68,13 +64,7 @@ if (production) {
 			format: 'es',
 			file: 'dist/side-panel-menu-thing.mjs',
 		},
-		plugins: [
-			svelte(),
-			resolve(),
-			buble({
-				transforms: { forOf: false },
-			}),
-		],
+		plugins: [svelte(), resolve()],
 	})
 }
 
