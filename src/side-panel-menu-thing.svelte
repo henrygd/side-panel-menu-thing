@@ -1,7 +1,7 @@
 <script>
 	import { tweened } from 'svelte/motion'
 	import { cubicOut } from 'svelte/easing'
-	import hideShowScroll from 'hide-show-scroll'
+	import { hideScroll, showScroll } from 'hide-show-scroll'
 
 	export let target = null
 	export let content = null
@@ -164,7 +164,7 @@
 			update: shown => {
 				if (shown) {
 					// stop background scrolling
-					fixed && preventScroll && hideShowScroll.hide()
+					fixed && preventScroll && hideScroll()
 					// todo: something about this - focus is
 					setTimeout(() => menu.focus(), 99)
 					onShow && onShow()
@@ -172,7 +172,7 @@
 					// restore focus
 					focusTrigger && focusTrigger.focus({ preventScroll: true })
 					// allow background scrolling
-					fixed && preventScroll && hideShowScroll.show()
+					fixed && preventScroll && showScroll()
 					onHide && onHide()
 				}
 			},
