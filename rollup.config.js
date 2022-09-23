@@ -3,8 +3,27 @@ import resolve from '@rollup/plugin-node-resolve'
 // import commonjs from '@rollup/plugin-commonjs'
 import { terser } from 'rollup-plugin-terser'
 import size from 'rollup-plugin-size'
+import modify from 'rollup-plugin-modify'
 
 const production = !process.env.ROLLUP_WATCH
+
+// find replace to make vanilla bundle smaller
+const findReplaceOptions = [
+	[/^\s*validate_store.+$|throw.+interpolate.+$/gm, ''],
+	['if (options.hydrate)', 'if (false)'],
+	['if (options.intro)', 'if (false)'],
+	[`, important ? 'important' : ''`, ''],
+	[/if \('props' in \$\$props.+;$/gm, ''],
+	[/\$\$self\.\$\$set = \$\$props => {\s+};$/gm, ''],
+	[
+		/if \(type === 'object'\) {(.|\n)+if \(type === 'number'\)/gm,
+		`if (type === 'number')`,
+	],
+	[': blank_object()', ': {}'],
+	[`typeof window !== 'undefined'`, 'true'],
+	['const doc = get_root_for_style(node)', 'const doc = document'],
+	[/get_root_for_style\(node\),/g, 'document,'],
+].map(([find, replace]) => modify({ find, replace }))
 
 let iifeOutput = [
 	{
@@ -44,6 +63,7 @@ let config = [
 				},
 			}),
 			resolve({ browser: true }),
+			...findReplaceOptions,
 			production &&
 				terser({
 					compress: {

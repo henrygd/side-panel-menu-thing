@@ -8,6 +8,7 @@ specifiers:
   live-server: ^1.2.2
   npm-run-all: ^4.1.5
   rollup: ^2.72.1
+  rollup-plugin-modify: ^3.0.0
   rollup-plugin-size: ^0.2.2
   rollup-plugin-svelte: ^7.1.0
   rollup-plugin-terser: ^7.0.2
@@ -24,6 +25,7 @@ devDependencies:
   live-server: 1.2.2
   npm-run-all: 4.1.5
   rollup: 2.79.1
+  rollup-plugin-modify: 3.0.0
   rollup-plugin-size: 0.2.2
   rollup-plugin-svelte: 7.1.0_3j3zasnyq6cqs3hqscflv4du7a
   rollup-plugin-terser: 7.0.2_rollup@2.79.1
@@ -1521,6 +1523,12 @@ packages:
     resolution: {integrity: sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==}
     dev: true
 
+  /magic-string/0.25.2:
+    resolution: {integrity: sha512-iLs9mPjh9IuTtRsqqhNGYcZXGei0Nh/A4xirrsqW7c+QhKVFL2vm7U09ru6cHRD22azaP/wMDgI+HCqbETMTtg==}
+    dependencies:
+      sourcemap-codec: 1.4.8
+    dev: true
+
   /magic-string/0.25.7:
     resolution: {integrity: sha512-4CrMT5DOHTDk4HYDlzmwu4FVCcIYI8gauveasrdCu2IKIFOJ3f0v/8MDGJCDL9oD2ppz/Av1b0Nj345H9M+XIA==}
     dependencies:
@@ -1811,6 +1819,13 @@ packages:
       is-wsl: 1.1.0
     dev: true
 
+  /ospec/3.1.0:
+    resolution: {integrity: sha512-+nGtjV3vlADp+UGfL51miAh/hB4awPBkQrArhcgG4trAaoA2gKt5bf9w0m9ch9zOr555cHWaCHZEDiBOkNZSxw==}
+    hasBin: true
+    dependencies:
+      glob: 7.1.6
+    dev: true
+
   /parse-json/4.0.0:
     resolution: {integrity: sha1-vjX1Qlvh9/bHRxhPmKeIy5lHfuA=}
     engines: {node: '>=4'}
@@ -2038,6 +2053,13 @@ packages:
   /ret/0.1.15:
     resolution: {integrity: sha512-TTlYpa+OL+vMMNG24xSlQGEJ3B/RzEfUlLct7b5G/ytav+wPrplCpVMFuwzXbkecJrb6IYo1iFb0S9v37754mg==}
     engines: {node: '>=0.12'}
+    dev: true
+
+  /rollup-plugin-modify/3.0.0:
+    resolution: {integrity: sha512-p/ffs0Y2jz2dEnWjq1oVC7SY37tuS+aP7whoNaQz1EAAOPg+k3vKJo8cMMWx6xpdd0NzhX4y2YF9o/NPu5YR0Q==}
+    dependencies:
+      magic-string: 0.25.2
+      ospec: 3.1.0
     dev: true
 
   /rollup-plugin-size/0.2.2:
