@@ -3,7 +3,7 @@
 	"version": "1.0.3",
 	"main": "dist/side-panel-menu-thing.umd.js",
 	"module": "dist/side-panel-menu-thing.mjs",
-	"svelte": "src/side-panel-menu-thing.svelte",
+	"svelte": "src/side-panel-menu-thing.js",
 	"description": "Good option for mobile menus, general content reveals, or whatever else.",
 	"license": "MIT",
 	"repository": {
