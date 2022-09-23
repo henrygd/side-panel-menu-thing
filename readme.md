@@ -9,12 +9,12 @@
 
 https://henrygd.me/side-panel-menu-thing
 
-Touch responsive, easy to implement, fairly lightweight, and MIT licensed. Good option for mobile menus, general content reveals, or whatever else. Tried to mimic a native app menu as much as possible.
+Touch responsive, easy to implement, fairly lightweight, and MIT licensed. Good option for mobile menus, general content reveals, or whatever else.
 
 - **ES Module**: `dist/side-panel-menu-thing.mjs`
 - **UMD**: `dist/side-panel-menu-thing.umd.js`
 - **IIFE / CDN**: `dist/side-panel-menu-thing.min.js`
-- **Svelte**: `src/side-panel-menu-thing.svelte`
+- **Svelte**: `src/side-panel-menu-thing.js`
 
 ## Install
 
@@ -22,7 +22,7 @@ Touch responsive, easy to implement, fairly lightweight, and MIT licensed. Good 
 $ npm install side-panel-menu-thing
 ```
 
-Grab the few lines of CSS from [`dist/side-panel-menu-thing.css`](dist/side-panel-menu-thing.css) and add to your styles.
+Grab the few lines of CSS from [`dist/side-panel-menu-thing.css`](dist/side-panel-menu-thing.css) and add to your styles, or import from the package.
 
 ## Usage and options
 
@@ -33,7 +33,7 @@ import sidePanel from 'side-panel-menu-thing'
 const menu = sidePanel({
 	// target container (where it's mounted and listens for touch)
 	target: document.body,
-	// panel content (will be removed and added in the panel)
+	// element mounted in panel (will be removed if it exists in DOM)
 	content: document.getElementById('content'),
 	// width of panel
 	width: 400,
@@ -48,9 +48,13 @@ const menu = sidePanel({
 	// prevent HTML scrolling when fixed
 	preventScroll: true,
 	// runs when the menu is opened (as soon as it's visible)
-	onShow: () => console.log('showing'),
+	onShow(container) {
+		console.log('showing', container)
+	},
 	// runs when the menu is closed (as soon as it's hidden)
-	onHide: () => console.log('hidden'),
+	onHide() {
+		console.log('hidden')
+	},
 })
 
 // options are accessible / changeable afterward
@@ -84,39 +88,15 @@ If you have a fixed menu set to open on drag, but want disable on a specific ele
 </div>
 ```
 
-## Do I need to use Svelte?
+## Usage with Svelte
 
-No. This was built using Svelte but doesn't require it to use.
-
-If you _are_ using it already in your project, you can import the svelte component rather than the processed bundle. If you're using rollup or webpack, this should happen automatically. Then pass the options in as props, including target, as below.
-
-I will probably release this as a standalone component at some point with a proper slot.
+This project uses Svelte internally, so you can save some bytes by importing the source files. This may happen automatically if your project picks up the svelte field in package.json, but to be sure you can use the import statement below.
 
 ```js
-const menu = new sidePanel({
-	target: document.body,
-	props: {
-		target: document.body,
-		content: document.getElementById('menu'),
-	},
-})
+import sidePanel from 'side-panel-menu-thing/src/side-panel-menu-thing'
 ```
 
-## Internet Explorer Support
-
-To use with IE, you need some polyfills. Easiest solution is to insert the script below in your html above where you're loading your other scripts. This will load the polyfills only in unsupported browsers.
-
-```html
-<script>
-	if (!('customElements' in window)) {
-		window.requestAnimationFrame = window.requestAnimationFrame.bind(window)
-		window.setTimeout = window.setTimeout.bind(window)
-		document.write(
-			'<script src="https://cdn.jsdelivr.net/combine/npm/promise-polyfill@8.1.0/dist/polyfill.min.js,npm/classlist-polyfill@1.2.0/src/index.js,npm/mdn-polyfills@5.19.0/Array.prototype.fill.js,npm/@webcomponents/webcomponentsjs@2.4.1/webcomponents-bundle.min.js"><\/script>'
-		)
-	}
-</script>
-```
+If you want a proper standalone component with a slot, let me know.
 
 ## License
 
