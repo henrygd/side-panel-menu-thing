@@ -1,3 +1,5 @@
+<svelte:options accessors={true} immutable={true} />
+
 <script>
 	import { tweened } from 'svelte/motion'
 	import { cubicOut } from 'svelte/easing'
@@ -179,8 +181,6 @@
 		}
 	}
 </script>
-
-<svelte:options accessors={true} immutable={true} />
 
 <div
 	class="spmt-wrap"
