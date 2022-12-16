@@ -75,15 +75,6 @@
 		}
 	}
 
-	function isIgnoredElement(el) {
-		while (el.parentNode) {
-			if (el.hasAttribute('data-no-panel')) {
-				return true
-			}
-			el = el.parentNode
-		}
-	}
-
 	function onMount(node) {
 		if (content) {
 			node.appendChild(content)
@@ -92,7 +83,7 @@
 		target.addEventListener(
 			'touchstart',
 			(e) => {
-				let isIgnored = isIgnoredElement(e.target)
+				let isIgnored = e.target.closest('[data-no-panel]')
 
 				startX = e.changedTouches[0].pageX
 				startY = e.changedTouches[0].pageY
@@ -188,7 +179,7 @@
 	class:novis={!shown}
 	class:fixed
 	bind:this={container}
-	data-no-panel="true"
+	data-no-panel
 >
 	<div class="spmt-overlay" on:click={hide} style="opacity: {overlayOpacity}" />
 	<div
