@@ -136,7 +136,7 @@
 				}
 
 				if (touchEventData.go) {
-					const percentDragged = distX / menu.clientWidth
+					const percentDragged = distX / width
 					const newMenuPos =
 						touchEventData.start + percentDragged * (left ? -100 : 100)
 
