@@ -47,7 +47,7 @@
 	$: shown = $menuPos < 100
 
 	// possible todo: allow duration passed through here w/ menuPos.set
-	export const show = e => {
+	export const show = (e) => {
 		$menuPos = 0
 		// if event, store target as focusTrigger
 		focusTrigger = e ? e.target : null
@@ -64,7 +64,7 @@
 			return
 		}
 		const containerNodes = container.querySelectorAll('*')
-		const tabbable = Array.from(containerNodes).filter(n => n.tabIndex >= 0)
+		const tabbable = Array.from(containerNodes).filter((n) => n.tabIndex >= 0)
 		if (tabbable.length) {
 			e.preventDefault()
 			let index = tabbable.indexOf(document.activeElement)
@@ -90,7 +90,7 @@
 
 		target.addEventListener(
 			'touchstart',
-			e => {
+			(e) => {
 				let isIgnored = isIgnoredElement(e.target)
 
 				startX = e.changedTouches[0].pageX
@@ -122,7 +122,7 @@
 
 		target.addEventListener(
 			'touchmove',
-			e => {
+			(e) => {
 				if (!shown && !touchEventData) {
 					return
 				}
@@ -147,7 +147,7 @@
 			{ passive: true }
 		)
 
-		target.addEventListener('touchend', e => {
+		target.addEventListener('touchend', (e) => {
 			if (shown) {
 				let { start, time } = touchEventData
 				let swipeDuration = Date.now() - time
@@ -163,7 +163,7 @@
 		})
 
 		return {
-			update: shown => {
+			update: (shown) => {
 				if (shown) {
 					// stop background scrolling
 					fixed && preventScroll && hideScroll()
@@ -187,14 +187,18 @@
 	class:novis={!shown}
 	class:fixed
 	bind:this={container}
-	data-no-panel="true">
+	data-no-panel="true"
+>
 	<div class="spmt-overlay" on:click={hide} style="opacity: {overlayOpacity}" />
 	<div
 		class="spmt"
 		class:left
-		style="width: {width}px; transform: translateX({left ? $menuPos * -1 : $menuPos}%)"
+		style="width: {width}px; transform: translateX({left
+			? $menuPos * -1
+			: $menuPos}%)"
 		tabindex={shown ? '0' : false}
 		bind:this={menu}
 		use:onMount={shown}
-		on:keydown={e => (e.keyCode === 27 ? hide() : trapFocus(e))} />
+		on:keydown={(e) => (e.keyCode === 27 ? hide() : trapFocus(e))}
+	/>
 </div>
