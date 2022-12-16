@@ -47,6 +47,8 @@ const menu = sidePanel({
 	dragOpen: true,
 	// prevent HTML scrolling when fixed
 	preventScroll: true,
+	// custom css class(es) added to wrap element (separate multiple with spaces)
+	wrapClass: '',
 	// runs when the menu is opened (as soon as it's visible)
 	onShow(container) {
 		console.log('showing', container)

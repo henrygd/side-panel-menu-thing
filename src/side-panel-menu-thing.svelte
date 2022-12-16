@@ -15,6 +15,7 @@
 	export let onShow = null
 	export let onHide = null
 	export let preventScroll = true
+	export let wrapClass = ''
 
 	content.parentElement?.removeChild(content)
 
@@ -183,7 +184,7 @@
 </script>
 
 <div
-	class="spmt-wrap"
+	class="spmt-wrap {wrapClass}"
 	class:novis={!shown}
 	class:fixed
 	bind:this={container}

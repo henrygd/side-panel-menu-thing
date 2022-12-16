@@ -15,6 +15,8 @@ export interface SidePanelOptions {
 	dragOpen?: boolean
 	/** prevent HTML scrolling when fixed */
 	preventScroll?: boolean
+	/** custom css class(es) added to wrap element (separate multiple with spaces) */
+	wrapClass?: String
 	/** runs when the menu is opened (as soon as it's visible) */
 	onShow?(container?: HTMLElement): void
 	/** runs when the menu is closed (as soon as it's hidden) */
