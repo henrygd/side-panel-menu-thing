@@ -170,13 +170,13 @@
 					fixed && preventScroll && hideScroll()
 					// todo: something about this - focus is
 					setTimeout(() => menu.focus(), 99)
-					onShow && onShow(container)
+					onShow?.(container)
 				} else {
 					// restore focus
-					focusTrigger && focusTrigger.focus({ preventScroll: true })
+					focusTrigger?.focus({ preventScroll: true })
 					// allow background scrolling
 					fixed && preventScroll && showScroll()
-					onHide && onHide()
+					onHide?.()
 				}
 			},
 		}
