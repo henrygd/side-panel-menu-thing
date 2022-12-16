@@ -131,8 +131,8 @@
 				let distX = touchobj.pageX - startX
 				let distY = touchobj.pageY - startY
 
-				if (touchEventData.go !== null) {
-					touchEventData.go = Math.abs(distX) > Math.abs(distY) ? true : null
+				if (!touchEventData.go && e.timeStamp - touchEventData.time < 150) {
+					touchEventData.go = Math.abs(distX) > Math.abs(distY) * 2
 				}
 
 				if (touchEventData.go) {
@@ -141,7 +141,7 @@
 						touchEventData.start + percentDragged * (left ? -100 : 100)
 
 					if (newMenuPos <= 100 && newMenuPos >= 0) {
-						menuPos.set(newMenuPos, { duration: 1 })
+						menuPos.set(newMenuPos, { duration: 0 })
 					}
 				}
 			},
@@ -154,7 +154,7 @@
 				let swipeDuration = e.timeStamp - time
 				let percentMoved = start - $menuPos
 				// todo? set shorter open close duration bc we've alredy moved it a bit
-				if (swipeDuration < 400 && Math.abs(percentMoved) > 5) {
+				if (swipeDuration < 300 && Math.abs(percentMoved) > 5) {
 					// quick swipe
 					percentMoved > 0 ? show() : hide()
 				} else {
