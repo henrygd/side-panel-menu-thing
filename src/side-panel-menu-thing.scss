@@ -9,6 +9,7 @@
 .spmt-wrap {
 	@include fillall;
 	z-index: 999;
+	contain: strict;
 	&.fixed {
 		position: fixed;
 	}
@@ -33,6 +34,7 @@
 	max-width: 92%;
 	outline: 0;
 	will-change: transform;
+	touch-action: pan-y;
 	&.left {
 		right: auto;
 		left: 0;
