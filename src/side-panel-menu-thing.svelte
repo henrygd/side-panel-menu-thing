@@ -115,7 +115,7 @@
 				}
 
 				touchEventData = touchEnabled
-					? { start: $menuPos, time: Date.now() }
+					? { start: $menuPos, time: e.timeStamp }
 					: null
 			},
 			{ passive: true }
@@ -151,7 +151,7 @@
 		target.addEventListener('touchend', (e) => {
 			if (shown) {
 				let { start, time } = touchEventData
-				let swipeDuration = Date.now() - time
+				let swipeDuration = e.timeStamp - time
 				let percentMoved = start - $menuPos
 				// todo? set shorter open close duration bc we've alredy moved it a bit
 				if (swipeDuration < 400 && Math.abs(percentMoved) > 5) {
