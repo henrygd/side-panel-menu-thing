@@ -504,6 +504,7 @@ function create_fragment(ctx) {
 	let div1;
 	let div1_tabindex_value;
 	let onMount_action;
+	let div2_class_value;
 	let mounted;
 	let dispose;
 
@@ -514,19 +515,19 @@ function create_fragment(ctx) {
 			t = space();
 			div1 = element("div");
 			attr(div0, "class", "spmt-overlay");
-			set_style(div0, "opacity", /*overlayOpacity*/ ctx[8]);
+			set_style(div0, "opacity", /*overlayOpacity*/ ctx[9]);
 			attr(div1, "class", "spmt");
 			set_style(div1, "width", /*width*/ ctx[0] + "px");
 
 			set_style(div1, "transform", "translateX(" + (/*left*/ ctx[2]
-			? /*$menuPos*/ ctx[4] * -1
-			: /*$menuPos*/ ctx[4]) + "%)");
+			? /*$menuPos*/ ctx[5] * -1
+			: /*$menuPos*/ ctx[5]) + "%)");
 
-			attr(div1, "tabindex", div1_tabindex_value = /*shown*/ ctx[7] ? '0' : false);
+			attr(div1, "tabindex", div1_tabindex_value = /*shown*/ ctx[8] ? '0' : false);
 			toggle_class(div1, "left", /*left*/ ctx[2]);
-			attr(div2, "class", "spmt-wrap");
-			attr(div2, "data-no-panel", "true");
-			toggle_class(div2, "novis", !/*shown*/ ctx[7]);
+			attr(div2, "class", div2_class_value = "spmt-wrap " + /*wrapClass*/ ctx[3]);
+			attr(div2, "data-no-panel", "");
+			toggle_class(div2, "novis", !/*shown*/ ctx[8]);
 			toggle_class(div2, "fixed", /*fixed*/ ctx[1]);
 		},
 		m(target, anchor) {
@@ -534,49 +535,53 @@ function create_fragment(ctx) {
 			append(div2, div0);
 			append(div2, t);
 			append(div2, div1);
-			/*div1_binding*/ ctx[20](div1);
-			/*div2_binding*/ ctx[22](div2);
+			/*div1_binding*/ ctx[21](div1);
+			/*div2_binding*/ ctx[23](div2);
 
 			if (!mounted) {
 				dispose = [
-					listen(div0, "click", /*hide*/ ctx[3]),
-					action_destroyer(onMount_action = /*onMount*/ ctx[11].call(null, div1, /*shown*/ ctx[7])),
-					listen(div1, "keydown", /*keydown_handler*/ ctx[21])
+					listen(div0, "click", /*hide*/ ctx[4]),
+					action_destroyer(onMount_action = /*onMount*/ ctx[12].call(null, div1, /*shown*/ ctx[8])),
+					listen(div1, "keydown", /*keydown_handler*/ ctx[22])
 				];
 
 				mounted = true;
 			}
 		},
 		p(ctx, [dirty]) {
-			if (dirty & /*overlayOpacity*/ 256) {
-				set_style(div0, "opacity", /*overlayOpacity*/ ctx[8]);
+			if (dirty & /*overlayOpacity*/ 512) {
+				set_style(div0, "opacity", /*overlayOpacity*/ ctx[9]);
 			}
 
 			if (dirty & /*width*/ 1) {
 				set_style(div1, "width", /*width*/ ctx[0] + "px");
 			}
 
-			if (dirty & /*left, $menuPos*/ 20) {
+			if (dirty & /*left, $menuPos*/ 36) {
 				set_style(div1, "transform", "translateX(" + (/*left*/ ctx[2]
-				? /*$menuPos*/ ctx[4] * -1
-				: /*$menuPos*/ ctx[4]) + "%)");
+				? /*$menuPos*/ ctx[5] * -1
+				: /*$menuPos*/ ctx[5]) + "%)");
 			}
 
-			if (dirty & /*shown*/ 128 && div1_tabindex_value !== (div1_tabindex_value = /*shown*/ ctx[7] ? '0' : false)) {
+			if (dirty & /*shown*/ 256 && div1_tabindex_value !== (div1_tabindex_value = /*shown*/ ctx[8] ? '0' : false)) {
 				attr(div1, "tabindex", div1_tabindex_value);
 			}
 
-			if (onMount_action && is_function(onMount_action.update) && dirty & /*shown*/ 128) onMount_action.update.call(null, /*shown*/ ctx[7]);
+			if (onMount_action && is_function(onMount_action.update) && dirty & /*shown*/ 256) onMount_action.update.call(null, /*shown*/ ctx[8]);
 
 			if (dirty & /*left*/ 4) {
 				toggle_class(div1, "left", /*left*/ ctx[2]);
 			}
 
-			if (dirty & /*shown*/ 128) {
-				toggle_class(div2, "novis", !/*shown*/ ctx[7]);
+			if (dirty & /*wrapClass*/ 8 && div2_class_value !== (div2_class_value = "spmt-wrap " + /*wrapClass*/ ctx[3])) {
+				attr(div2, "class", div2_class_value);
 			}
 
-			if (dirty & /*fixed*/ 2) {
+			if (dirty & /*wrapClass, shown*/ 264) {
+				toggle_class(div2, "novis", !/*shown*/ ctx[8]);
+			}
+
+			if (dirty & /*wrapClass, fixed*/ 10) {
 				toggle_class(div2, "fixed", /*fixed*/ ctx[1]);
 			}
 		},
@@ -584,22 +589,12 @@ function create_fragment(ctx) {
 		o: noop,
 		d(detaching) {
 			if (detaching) detach(div2);
-			/*div1_binding*/ ctx[20](null);
-			/*div2_binding*/ ctx[22](null);
+			/*div1_binding*/ ctx[21](null);
+			/*div2_binding*/ ctx[23](null);
 			mounted = false;
 			run_all(dispose);
 		}
 	};
-}
-
-function isIgnoredElement(el) {
-	while (el.parentNode) {
-		if (el.hasAttribute('data-no-panel')) {
-			return true;
-		}
-
-		el = el.parentNode;
-	}
 }
 
 function instance($$self, $$props, $$invalidate) {
@@ -616,6 +611,7 @@ function instance($$self, $$props, $$invalidate) {
 	let { onShow = null } = $$props;
 	let { onHide = null } = $$props;
 	let { preventScroll = true } = $$props;
+	let { wrapClass = '' } = $$props;
 	content.parentElement?.removeChild(content);
 
 	// starting touch points
@@ -638,7 +634,7 @@ function instance($$self, $$props, $$invalidate) {
 	// 100 is closed, 0 is open (this is the x transform in percent)
 	const menuPos = tweened(100, { duration, easing: cubicOut });
 
-	component_subscribe($$self, menuPos, value => $$invalidate(4, $menuPos = value));
+	component_subscribe($$self, menuPos, value => $$invalidate(5, $menuPos = value));
 
 	const show = e => {
 		set_store_value(menuPos, $menuPos = 0, $menuPos);
@@ -679,7 +675,7 @@ function instance($$self, $$props, $$invalidate) {
 		target.addEventListener(
 			'touchstart',
 			e => {
-				let isIgnored = isIgnoredElement(e.target);
+				let isIgnored = e.target.closest('[data-no-panel]');
 				startX = e.changedTouches[0].pageX;
 				startY = e.changedTouches[0].pageY;
 
@@ -697,7 +693,7 @@ function instance($$self, $$props, $$invalidate) {
 				}
 
 				touchEventData = touchEnabled
-				? { start: $menuPos, time: Date.now() }
+				? { start: $menuPos, time: e.timeStamp }
 				: null;
 			},
 			{ passive: true }
@@ -714,16 +710,16 @@ function instance($$self, $$props, $$invalidate) {
 				let distX = touchobj.pageX - startX;
 				let distY = touchobj.pageY - startY;
 
-				if (touchEventData.go !== null) {
-					touchEventData.go = Math.abs(distX) > Math.abs(distY) ? true : null;
+				if (!touchEventData.go && e.timeStamp - touchEventData.time < 150) {
+					touchEventData.go = Math.abs(distX) > Math.abs(distY) * 2;
 				}
 
 				if (touchEventData.go) {
-					const percentDragged = distX / menu.clientWidth;
+					const percentDragged = distX / width;
 					const newMenuPos = touchEventData.start + percentDragged * (left ? -100 : 100);
 
 					if (newMenuPos <= 100 && newMenuPos >= 0) {
-						menuPos.set(newMenuPos, { duration: 1 });
+						menuPos.set(newMenuPos, { duration: 0 });
 					}
 				}
 			},
@@ -733,11 +729,11 @@ function instance($$self, $$props, $$invalidate) {
 		target.addEventListener('touchend', e => {
 			if (shown) {
 				let { start, time } = touchEventData;
-				let swipeDuration = Date.now() - time;
+				let swipeDuration = e.timeStamp - time;
 				let percentMoved = start - $menuPos;
 
 				// todo? set shorter open close duration bc we've alredy moved it a bit
-				if (swipeDuration < 400 && Math.abs(percentMoved) > 5) {
+				if (swipeDuration < 300 && Math.abs(percentMoved) > 5) {
 					// quick swipe
 					percentMoved > 0 ? show() : hide();
 				} else {
@@ -755,15 +751,15 @@ function instance($$self, $$props, $$invalidate) {
 					// todo: something about this - focus is
 					setTimeout(() => menu.focus(), 99);
 
-					onShow && onShow(container);
+					onShow?.(container);
 				} else {
 					// restore focus
-					focusTrigger && focusTrigger.focus({ preventScroll: true });
+					focusTrigger?.focus({ preventScroll: true });
 
 					// allow background scrolling
 					fixed && preventScroll && s();
 
-					onHide && onHide();
+					onHide?.();
 				}
 			}
 		};
@@ -772,7 +768,7 @@ function instance($$self, $$props, $$invalidate) {
 	function div1_binding($$value) {
 		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
 			menu = $$value;
-			$$invalidate(6, menu);
+			$$invalidate(7, menu);
 		});
 	}
 
@@ -781,32 +777,33 @@ function instance($$self, $$props, $$invalidate) {
 	function div2_binding($$value) {
 		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
 			container = $$value;
-			$$invalidate(5, container);
+			$$invalidate(6, container);
 		});
 	}
 
 	$$self.$$set = $$props => {
-		if ('target' in $$props) $$invalidate(12, target = $$props.target);
-		if ('content' in $$props) $$invalidate(13, content = $$props.content);
+		if ('target' in $$props) $$invalidate(13, target = $$props.target);
+		if ('content' in $$props) $$invalidate(14, content = $$props.content);
 		if ('width' in $$props) $$invalidate(0, width = $$props.width);
-		if ('duration' in $$props) $$invalidate(14, duration = $$props.duration);
+		if ('duration' in $$props) $$invalidate(15, duration = $$props.duration);
 		if ('fixed' in $$props) $$invalidate(1, fixed = $$props.fixed);
 		if ('left' in $$props) $$invalidate(2, left = $$props.left);
-		if ('dragOpen' in $$props) $$invalidate(15, dragOpen = $$props.dragOpen);
-		if ('onShow' in $$props) $$invalidate(16, onShow = $$props.onShow);
-		if ('onHide' in $$props) $$invalidate(17, onHide = $$props.onHide);
-		if ('preventScroll' in $$props) $$invalidate(18, preventScroll = $$props.preventScroll);
+		if ('dragOpen' in $$props) $$invalidate(16, dragOpen = $$props.dragOpen);
+		if ('onShow' in $$props) $$invalidate(17, onShow = $$props.onShow);
+		if ('onHide' in $$props) $$invalidate(18, onHide = $$props.onHide);
+		if ('preventScroll' in $$props) $$invalidate(19, preventScroll = $$props.preventScroll);
+		if ('wrapClass' in $$props) $$invalidate(3, wrapClass = $$props.wrapClass);
 	};
 
 	$$self.$$.update = () => {
-		if ($$self.$$.dirty & /*$menuPos*/ 16) {
+		if ($$self.$$.dirty & /*$menuPos*/ 32) {
 			// adjust overlay opacity automatically based on menu position
-			$$invalidate(8, overlayOpacity = (100 - $menuPos) / 100);
+			$$invalidate(9, overlayOpacity = (100 - $menuPos) / 100);
 		}
 
-		if ($$self.$$.dirty & /*$menuPos*/ 16) {
+		if ($$self.$$.dirty & /*$menuPos*/ 32) {
 			// whether the menu is open or in process of opening
-			$$invalidate(7, shown = $menuPos < 100);
+			$$invalidate(8, shown = $menuPos < 100);
 		}
 	};
 
@@ -814,6 +811,7 @@ function instance($$self, $$props, $$invalidate) {
 		width,
 		fixed,
 		left,
+		wrapClass,
 		hide,
 		$menuPos,
 		container,
@@ -842,23 +840,24 @@ class Side_panel_menu_thing extends SvelteComponent {
 		super();
 
 		init(this, options, instance, create_fragment, not_equal, {
-			target: 12,
-			content: 13,
+			target: 13,
+			content: 14,
 			width: 0,
-			duration: 14,
+			duration: 15,
 			fixed: 1,
 			left: 2,
-			dragOpen: 15,
-			onShow: 16,
-			onHide: 17,
-			preventScroll: 18,
-			show: 19,
-			hide: 3
+			dragOpen: 16,
+			onShow: 17,
+			onHide: 18,
+			preventScroll: 19,
+			wrapClass: 3,
+			show: 20,
+			hide: 4
 		});
 	}
 
 	get target() {
-		return this.$$.ctx[12];
+		return this.$$.ctx[13];
 	}
 
 	set target(target) {
@@ -867,7 +866,7 @@ class Side_panel_menu_thing extends SvelteComponent {
 	}
 
 	get content() {
-		return this.$$.ctx[13];
+		return this.$$.ctx[14];
 	}
 
 	set content(content) {
@@ -885,7 +884,7 @@ class Side_panel_menu_thing extends SvelteComponent {
 	}
 
 	get duration() {
-		return this.$$.ctx[14];
+		return this.$$.ctx[15];
 	}
 
 	set duration(duration) {
@@ -912,7 +911,7 @@ class Side_panel_menu_thing extends SvelteComponent {
 	}
 
 	get dragOpen() {
-		return this.$$.ctx[15];
+		return this.$$.ctx[16];
 	}
 
 	set dragOpen(dragOpen) {
@@ -921,7 +920,7 @@ class Side_panel_menu_thing extends SvelteComponent {
 	}
 
 	get onShow() {
-		return this.$$.ctx[16];
+		return this.$$.ctx[17];
 	}
 
 	set onShow(onShow) {
@@ -930,7 +929,7 @@ class Side_panel_menu_thing extends SvelteComponent {
 	}
 
 	get onHide() {
-		return this.$$.ctx[17];
+		return this.$$.ctx[18];
 	}
 
 	set onHide(onHide) {
@@ -939,7 +938,7 @@ class Side_panel_menu_thing extends SvelteComponent {
 	}
 
 	get preventScroll() {
-		return this.$$.ctx[18];
+		return this.$$.ctx[19];
 	}
 
 	set preventScroll(preventScroll) {
@@ -947,12 +946,21 @@ class Side_panel_menu_thing extends SvelteComponent {
 		flush();
 	}
 
+	get wrapClass() {
+		return this.$$.ctx[3];
+	}
+
+	set wrapClass(wrapClass) {
+		this.$$set({ wrapClass });
+		flush();
+	}
+
 	get show() {
-		return this.$$.ctx[19];
+		return this.$$.ctx[20];
 	}
 
 	get hide() {
-		return this.$$.ctx[3];
+		return this.$$.ctx[4];
 	}
 }
 
