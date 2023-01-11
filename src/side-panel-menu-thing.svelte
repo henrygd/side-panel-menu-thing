@@ -181,7 +181,9 @@
 	bind:this={container}
 	data-no-panel
 >
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div class="spmt-overlay" on:click={hide} style="opacity: {overlayOpacity}" />
+	<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 	<div
 		class="spmt"
 		class:left
