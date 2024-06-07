@@ -1,9 +1,13 @@
-# Side Panel / Mobile Menu Thing [![npm][npm-image]][npm-url] [![File Size][size-image]][cdn-url]
-
 [npm-image]: https://badgen.net/npm/v/side-panel-menu-thing
 [npm-url]: https://www.npmjs.com/package/side-panel-menu-thing
-[size-image]: https://badgen.net/badgesize/gzip/henrygd/side-panel-menu-thing/master/dist/side-panel-menu-thing.min.js
+[size-image]: https://flat.badgen.net/static/gzip%20size/3.8%20KB/green
+[license-image]: https://flat.badgen.net/github/license/henrygd/trap-focus-svelte?color=purple
+[license-url]: /license
 [cdn-url]: https://cdn.jsdelivr.net/npm/side-panel-menu-thing/dist/side-panel-menu-thing.min.js
+
+# Side Panel / Mobile Menu Thing
+
+[![npm][npm-image]][npm-url] [![3.8 KB gzip][size-image]][cdn-url] [![MIT license][license-image]][license-url]
 
 ![example](example.gif)
 
